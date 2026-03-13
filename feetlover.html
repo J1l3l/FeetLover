@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FeetLover</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --dark: #111111;
+            --mid: #1e1e1e;
+            --accent: #c8974a;
+            --accent2: #e8b96a;
+            --light: #f0ebe3;
+            --text: #d4cfc8;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: var(--dark);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* HEADER */
+        header {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1410 100%);
+            padding: 28px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #2a2420;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--accent);
+            letter-spacing: 2px;
+            text-shadow: 0 0 30px rgba(200, 151, 74, 0.3);
+        }
+
+        .logo span {
+            color: var(--light);
+        }
+
+        /* NAV */
+        nav {
+            display: flex;
+            gap: 8px;
+            background: rgba(255,255,255,0.04);
+            padding: 6px;
+            border-radius: 50px;
+            border: 1px solid rgba(200,151,74,0.2);
+        }
+
+        nav button {
+            background: none;
+            border: none;
+            color: var(--text);
+            font-family: 'Lato', sans-serif;
+            font-size: 0.88rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 10px 24px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        nav button:hover {
+            color: var(--accent);
+            background: rgba(200,151,74,0.08);
+        }
+
+        nav button.active {
+            background: var(--accent);
+            color: var(--dark);
+        }
+
+        /* PAGES */
+        .page {
+            display: none;
+            flex: 1;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .page.active {
+            display: flex;
+            flex-direction: column;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ====== PAGE ACCUEIL ====== */
+        #page-accueil {
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: calc(100vh - 90px);
+            padding: 60px 40px;
+            background: radial-gradient(ellipse at center, #1a1208 0%, #0a0a0a 70%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        #page-accueil::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(200,151,74,0.06) 0%, transparent 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            border: 1px solid rgba(200,151,74,0.4);
+            color: var(--accent);
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            padding: 8px 20px;
+            border-radius: 50px;
+            margin-bottom: 32px;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            color: var(--light);
+            line-height: 1.05;
+            margin-bottom: 24px;
+        }
+
+        .hero-title em {
+            color: var(--accent);
+            font-style: italic;
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            color: #8a8580;
+            max-width: 500px;
+            line-height: 1.8;
+            margin-bottom: 48px;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--dark);
+            font-family: 'Lato', sans-serif;
+            font-weight: 700;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 16px 40px;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .hero-cta:hover {
+            background: var(--accent2);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(200,151,74,0.3);
+        }
+
+        .divider {
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            margin: 0 auto 24px;
+        }
+
+        /* ====== PAGE GALERIE ====== */
+        #page-galerie {
+            padding: 60px 40px 100px;
+            background: #0d0d0d;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .page-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: var(--light);
+            margin-bottom: 12px;
+        }
+
+        .page-header p {
+            color: #6a6560;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 16px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            background: var(--mid);
+            aspect-ratio: 3/4;
+            border: 1px solid #2a2a2a;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            border-color: rgba(200,151,74,0.3);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.4) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        /* ====== PAGE CONTACT ====== */
+        #page-contact {
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - 90px);
+            padding: 60px 40px;
+            background: radial-gradient(ellipse at bottom left, #120e08 0%, #0a0a0a 60%);
+        }
+
+        .contact-card {
+            background: linear-gradient(135deg, #161410 0%, #1c1814 100%);
+            border: 1px solid #2e2820;
+            border-radius: 20px;
+            padding: 60px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.6);
+        }
+
+        .contact-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(200,151,74,0.1);
+            border: 1px solid rgba(200,151,74,0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 28px;
+            font-size: 1.8rem;
+        }
+
+        .contact-card h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--light);
+            margin-bottom: 10px;
+        }
+
+        .contact-card p.sub {
+            color: #6a6560;
+            font-size: 0.9rem;
+            margin-bottom: 40px;
+        }
+
+        .contact-line {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid #2a2420;
+            border-radius: 12px;
+            padding: 20px 28px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .contact-line:hover {
+            border-color: rgba(200,151,74,0.3);
+        }
+
+        .contact-line-icon {
+            font-size: 1.3rem;
+            width: 40px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .contact-line-info {
+            text-align: left;
+        }
+
+        .contact-line-label {
+            font-size: 0.72rem;
+            color: #5a5550;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .contact-line-value {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--light);
+        }
+
+        .contact-line-value a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .contact-line-value a:hover {
+            color: var(--accent2);
+        }
+
+        /* FOOTER */
+        footer {
+            background: #080808;
+            color: #3a3530;
+            text-align: center;
+            padding: 18px;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            border-top: 1px solid #1a1a1a;
+        }
+
+        footer span {
+            color: var(--accent);
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            header { padding: 18px 20px; flex-direction: column; gap: 16px; }
+            .logo { font-size: 1.5rem; }
+            nav button { padding: 8px 14px; font-size: 0.78rem; }
+            #page-galerie { padding: 40px 20px 80px; }
+            .contact-card { padding: 36px 24px; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">Feet<span>Lover</span></div>
+    <nav>
+        <button class="active" onclick="showPage('accueil', this)">Accueil</button>
+        <button onclick="showPage('galerie', this)">Galerie</button>
+        <button onclick="showPage('contact', this)">Contact</button>
+    </nav>
+</header>
+
+<!-- PAGE ACCUEIL -->
+<div class="page active" id="page-accueil">
+    <div class="hero-badge">✦ Bienvenue</div>
+    <h1 class="hero-title">Bienvenue sur<br><em>FeetLover</em></h1>
+    <div class="divider"></div>
+    <p class="hero-subtitle">Le site dédié aux passionnés. Découvrez notre galerie exclusive et contactez-nous pour en savoir plus.</p>
+    <button class="hero-cta" onclick="showPage('galerie', document.querySelectorAll('nav button')[1])">Voir la Galerie →</button>
+</div>
+
+<!-- PAGE GALERIE -->
+<div class="page" id="page-galerie">
+    <div class="page-header">
+        <h2>Galerie</h2>
+        <p>Notre sélection exclusive</p>
+    </div>
+    <div class="gallery-grid">
+        <div class="gallery-item"><img src="télécharger (5).jpg" alt="Photo 1" onerror="this.parentElement.style.background='#1e1a14'"></div>
+        <div class="gallery-item"><img src="télécharger (6).jpg" alt="Photo 2" onerror="this.parentElement.style.background='#1e1a14'"></div>
+        <div class="gallery-item"><img src="télécharger (7).jpg" alt="Photo 3" onerror="this.parentElement.style.background='#1e1a14'"></div>
+        <div class="gallery-item"><img src="télécharger (8).jpg" alt="Photo 4" onerror="this.parentElement.style.background='#1e1a14'"></div>
+        <div class="gallery-item"><img src="télécharger (9).jpg" alt="Photo 5" onerror="this.parentElement.style.background='#1e1a14'"></div>
+        <div class="gallery-item"><img src="télécharger (10).jpg" alt="Photo 6" onerror="this.parentElement.style.background='#1e1a14'"></div>
+    </div>
+</div>
+
+<!-- PAGE CONTACT -->
+<div class="page" id="page-contact">
+    <div class="contact-card">
+        <div class="contact-icon">📞</div>
+        <h2>Nous Contacter</h2>
+        <p class="sub">Disponible pour toute demande</p>
+
+        <div class="contact-line">
+            <div class="contact-line-icon">📱</div>
+            <div class="contact-line-info">
+                <div class="contact-line-label">Téléphone</div>
+                <div class="contact-line-value"><a href="tel:0783154061">07 83 15 40 61</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    © 2026 <span>FeetLover</span> — All Rights Reserved
+</footer>
+
+<script>
+    function showPage(pageId, btn) {
+        // Hide all pages
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        // Deactivate all nav buttons
+        document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+
+        // Show selected page and activate button
+        document.getElementById('page-' + pageId).classList.add('active');
+        btn.classList.add('active');
+
+        // Scroll to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+</script>
+</body>
+</html>
